@@ -79,8 +79,7 @@ export default function App() {
         </div>
       </section>
 
-      <p className="rules"><b>Como jogar:</b> toque num palito para levantá-lo e depois toque num espaço tracejado para largá-lo. Vale mexer só <b>um</b> palito. Depois que você larga o palito, a jogada acabou: se a conta não fechar, toque em <b>Tentar de novo</b>. Enquanto o palito está levantado, você pode devolvê-lo tocando nele. O sinal de <b>=</b> fica fixo. Um <b>+</b> sem o palito em pé vira <b>−</b>.</p>
-      <p className="rules"><b>Chefões:</b> as fases 5, 10 e 15 são chefões e não têm dica. Nas fases 5 e 10 você tem 3 vidas, e cada conta errada custa uma. O chefão final, na fase 15, dá só uma vida. Se as vidas acabarem, o chefão recomeça.</p>
+      <p className="rules"><b>Como jogar:</b> toque num palito para levantá-lo e depois toque num espaço tracejado para largá-lo. Vale mexer só <b>um</b> palito. Depois que você larga o palito, a jogada acabou: se a conta não fechar, toque em <b>Tentar de novo</b>. Enquanto o palito está levantado, você pode devolvê-lo tocando nele.</p>
     </div>
   );
 }
