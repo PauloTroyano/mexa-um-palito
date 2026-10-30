@@ -4,69 +4,84 @@ const getCtx = () => {
   return ctx;
 };
 
-function play(fn) {
-  try { fn(getCtx()); } catch { /* sem suporte a áudio */ }
+function chip(notes, type = 'square', vol = 0.18) {
+  try {
+    const c = getCtx();
+    notes.forEach(([freq, start, dur]) => {
+      const o = c.createOscillator();
+      const g = c.createGain();
+      o.connect(g); g.connect(c.destination);
+      o.type = type;
+      o.frequency.value = freq;
+      g.gain.setValueAtTime(0, c.currentTime + start);
+      g.gain.linearRampToValueAtTime(vol, c.currentTime + start + 0.005);
+      g.gain.setValueAtTime(vol, c.currentTime + start + dur - 0.01);
+      g.gain.linearRampToValueAtTime(0, c.currentTime + start + dur);
+      o.start(c.currentTime + start);
+      o.stop(c.currentTime + start + dur + 0.01);
+    });
+  } catch { /* sem suporte a áudio */ }
 }
 
 export const sounds = {
+  // pegar palito — blip curto pra cima
   pickup() {
-    play((c) => {
-      const o = c.createOscillator();
-      const g = c.createGain();
-      o.connect(g); g.connect(c.destination);
-      o.type = 'sine';
-      o.frequency.setValueAtTime(800, c.currentTime);
-      o.frequency.exponentialRampToValueAtTime(1200, c.currentTime + 0.06);
-      g.gain.setValueAtTime(0.3, c.currentTime);
-      g.gain.exponentialRampToValueAtTime(0.001, c.currentTime + 0.1);
-      o.start(c.currentTime);
-      o.stop(c.currentTime + 0.1);
-    });
+    chip([[330, 0, 0.04], [440, 0.04, 0.04]]);
   },
 
+  // largar palito — blip curto pra baixo
   place() {
-    play((c) => {
-      const o = c.createOscillator();
-      const g = c.createGain();
-      o.connect(g); g.connect(c.destination);
-      o.type = 'sine';
-      o.frequency.setValueAtTime(600, c.currentTime);
-      o.frequency.exponentialRampToValueAtTime(400, c.currentTime + 0.08);
-      g.gain.setValueAtTime(0.3, c.currentTime);
-      g.gain.exponentialRampToValueAtTime(0.001, c.currentTime + 0.12);
-      o.start(c.currentTime);
-      o.stop(c.currentTime + 0.12);
-    });
+    chip([[440, 0, 0.04], [330, 0.04, 0.05]]);
   },
 
+  // acertar — fanfarra ascendente 8-bit
   correct() {
-    play((c) => {
-      [[523, 0], [659, 0.1], [784, 0.2], [1047, 0.3]].forEach(([freq, when]) => {
-        const o = c.createOscillator();
-        const g = c.createGain();
-        o.connect(g); g.connect(c.destination);
-        o.type = 'sine';
-        o.frequency.value = freq;
-        g.gain.setValueAtTime(0.25, c.currentTime + when);
-        g.gain.exponentialRampToValueAtTime(0.001, c.currentTime + when + 0.18);
-        o.start(c.currentTime + when);
-        o.stop(c.currentTime + when + 0.2);
-      });
-    });
+    chip([
+      [262, 0,    0.08],
+      [330, 0.09, 0.08],
+      [392, 0.18, 0.08],
+      [523, 0.27, 0.18],
+      [659, 0.27, 0.18],
+    ]);
   },
 
+  // errar — descida triste 8-bit
   wrong() {
-    play((c) => {
-      const o = c.createOscillator();
-      const g = c.createGain();
-      o.connect(g); g.connect(c.destination);
-      o.type = 'sawtooth';
-      o.frequency.setValueAtTime(300, c.currentTime);
-      o.frequency.exponentialRampToValueAtTime(150, c.currentTime + 0.3);
-      g.gain.setValueAtTime(0.25, c.currentTime);
-      g.gain.exponentialRampToValueAtTime(0.001, c.currentTime + 0.35);
-      o.start(c.currentTime);
-      o.stop(c.currentTime + 0.35);
-    });
+    chip([
+      [330, 0,    0.08],
+      [277, 0.09, 0.08],
+      [220, 0.18, 0.15],
+    ], 'square', 0.2);
+  },
+
+  // dica — dois bips descendentes (custa uma vida)
+  hint() {
+    chip([[523, 0, 0.06], [392, 0.08, 0.09]]);
+  },
+
+  // nova partida — jingle de arranque
+  newGame() {
+    chip([
+      [262, 0,    0.07],
+      [330, 0.08, 0.07],
+      [392, 0.16, 0.07],
+      [523, 0.24, 0.07],
+      [392, 0.32, 0.07],
+      [523, 0.40, 0.14],
+    ]);
+  },
+
+  // continuar — acorde suave de retorno
+  continue() {
+    chip([
+      [392, 0,    0.07],
+      [494, 0.08, 0.07],
+      [587, 0.16, 0.12],
+    ]);
+  },
+
+  // menu — bip neutro de navegação
+  menu() {
+    chip([[440, 0, 0.05], [330, 0.06, 0.07]]);
   },
 };

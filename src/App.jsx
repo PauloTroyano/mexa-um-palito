@@ -45,9 +45,9 @@ function StartScreen({ onNew, onContinue, hasProgress }) {
         <p className="start-desc">15 fases de palitos de fósforo. Você tem <b>5 vidas</b> para completar o jogo.</p>
 
         <div className="start-actions">
-          <button className="btn primary start-btn" onClick={onNew}>Nova partida</button>
+          <button className="btn primary start-btn" onClick={() => { sounds.newGame(); onNew(); }}>Nova partida</button>
           {hasProgress && (
-            <button className="btn start-btn" onClick={onContinue}>Continuar</button>
+            <button className="btn start-btn" onClick={() => { sounds.continue(); onContinue(); }}>Continuar</button>
           )}
         </div>
 
@@ -114,7 +114,7 @@ export default function App() {
             <p className="sub">Mova um único palito e deixe a conta certa.</p>
           </div>
         </div>
-        <button className="btn" style={{fontSize:'16px',padding:'4px 12px'}} onClick={() => setScreen('start')}>Menu</button>
+        <button className="btn" style={{fontSize:'16px',padding:'4px 12px'}} onClick={() => { sounds.menu(); setScreen('start'); }}>Menu</button>
       </header>
 
       <LevelPicker current={level} done={done} onPick={(i) => dispatch({ type: 'load', level: i })} />
@@ -137,7 +137,7 @@ export default function App() {
 
         <div className="actions">
           <button className={`btn${lostNow ? ' primary' : ''}`} disabled={solved || (!orig && !lifted && !lostNow)} onClick={() => dispatch({ type: lives === 0 ? 'restart' : 'retry' })}>{lives === 0 ? 'Recomeçar do zero' : 'Tentar de novo'}</button>
-          {!lv.boss && !solved && <button className="btn" disabled={lives <= 0} onClick={() => dispatch({ type: 'hint' })}>Dica (−1 vida)</button>}
+          {!lv.boss && !solved && <button className="btn" disabled={lives <= 0} onClick={() => { sounds.hint(); dispatch({ type: 'hint' }); }}>Dica (−1 vida)</button>}
           {solved && !last && <button className="btn primary" onClick={() => dispatch({ type: 'next' })}>Próxima fase</button>}
         </div>
       </section>
