@@ -12,7 +12,8 @@ export function initState(saved = {}) {
 
 function loadLevel(state, level, keepLives) {
   const lv = LEVELS[level];
-  const lives = keepLives && state.lives > 0 && state.level === level ? state.lives : livesFor(level);
+  const max = livesFor(level);
+  const lives = keepLives && state.lives > 0 ? Math.min(state.lives, max) : max;
   return {
     ...state,
     level,
@@ -91,7 +92,7 @@ export function reducer(state, action) {
   switch (action.type) {
     case 'load': return loadLevel(state, action.level, false);
     case 'retry': return loadLevel(state, state.level, true);
-    case 'next': return loadLevel(state, Math.min(state.level + 1, LEVELS.length - 1), false);
+    case 'next': return loadLevel(state, Math.min(state.level + 1, LEVELS.length - 1), true);
     case 'tap': return tap(state, action.slot);
     case 'hint': return hint(state);
     default: return state;
