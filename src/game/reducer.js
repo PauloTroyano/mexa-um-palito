@@ -48,7 +48,7 @@ function check(state) {
     const max = livesFor(state.level);
     const label = lv.boss ? 'O chefão venceu desta vez.' : 'Suas vidas acabaram.';
     return { ...state, shake, lives: 0, lostNow: true,
-      msg: m(` Toque em Tentar de novo para recomeçar com ${max === 1 ? 'sua vida' : `${max} vidas`}.`, label) };
+      msg: m(' Toque em Recomeçar do zero para voltar à fase 1.', label) };
   }
   return { ...state, shake, lives, lostNow: true, msg: m(`${why} Você perdeu uma vida. Toque em Tentar de novo.`) };
 }
@@ -91,6 +91,7 @@ function hint(state) {
 export function reducer(state, action) {
   switch (action.type) {
     case 'load': return loadLevel(state, action.level, false);
+    case 'restart': return loadLevel({ ...state, done: [] }, 0, false);
     case 'retry': return loadLevel(state, state.level, true);
     case 'next': return loadLevel(state, Math.min(state.level + 1, LEVELS.length - 1), true);
     case 'tap': return tap(state, action.slot);

@@ -63,7 +63,7 @@ export default function App() {
         <p className="msg">{msg.em && <strong>{msg.em}</strong>}{msg.text}</p>
 
         <div className="actions">
-          <button className="btn" disabled={solved || (!orig && !lifted)} onClick={() => dispatch({ type: 'retry' })}>Tentar de novo</button>
+          <button className="btn" disabled={solved || (!orig && !lifted && !lostNow)} onClick={() => dispatch({ type: lives === 0 ? 'restart' : 'retry' })}>{lives === 0 ? 'Recomeçar do zero' : 'Tentar de novo'}</button>
           {!lv.boss && !solved && <button className="btn" onClick={() => dispatch({ type: 'hint' })}>Dica</button>}
           {solved && !last && <button className="btn primary" onClick={() => dispatch({ type: 'next' })}>Próxima fase</button>}
         </div>
