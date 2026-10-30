@@ -95,6 +95,7 @@ export function reducer(state, action) {
   switch (action.type) {
     case 'load': return loadLevel(state, action.level, false);
     case 'restart': return loadLevel({ ...state, done: [] }, 0, false);
+    case '_load_save': return initState(action.saved);
     case 'retry': return loadLevel(state, state.level, true);
     case 'next': return loadLevel(state, Math.min(state.level + 1, LEVELS.length - 1), true);
     case 'tap': return tap(state, action.slot);

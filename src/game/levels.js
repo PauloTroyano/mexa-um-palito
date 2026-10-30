@@ -17,8 +17,7 @@ export const LEVELS = [
   {
     p: '19+28+23=84',
     boss: 'Chefão final',
-    intro: 'Números menores que 100, três parcelas e só uma vida. Não tem segunda chance.',
-    lives: 1,
+    intro: 'Números menores que 100, três parcelas. Você chega aqui com as vidas que ainda tem.',
   },
 ];
 
