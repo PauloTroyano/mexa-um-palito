@@ -22,4 +22,4 @@ export const LEVELS = [
   },
 ];
 
-export const livesFor = (level) => LEVELS[level].lives ?? 3;
+export const livesFor = (level) => LEVELS[level].lives ?? 5;

@@ -75,12 +75,15 @@ function tap(state, slot) {
 
 function hint(state) {
   if (state.solved || LEVELS[state.level].boss) return state;
+  if (state.lives <= 0) return state;
   const [sol] = solutions(parse(LEVELS[state.level].p));
   if (!sol) return state;
   const stage = state.hint ? 2 : 1;
   const base = state.orig ? loadLevel(state, state.level, true) : state;
+  const lives = base.lives - 1;
   return {
     ...base,
+    lives,
     hint: { ...sol, stage },
     msg: stage === 1
       ? m('O palito destacado é o que precisa sair. Toque em Dica de novo para ver o destino.')

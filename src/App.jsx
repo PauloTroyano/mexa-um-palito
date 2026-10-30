@@ -74,7 +74,7 @@ export default function App() {
 
         <div className="actions">
           <button className={`btn${lostNow ? ' primary' : ''}`} disabled={solved || (!orig && !lifted && !lostNow)} onClick={() => dispatch({ type: lives === 0 ? 'restart' : 'retry' })}>{lives === 0 ? 'Recomeçar do zero' : 'Tentar de novo'}</button>
-          {!lv.boss && !solved && <button className="btn" onClick={() => dispatch({ type: 'hint' })}>Dica</button>}
+          {!lv.boss && !solved && <button className="btn" disabled={lives <= 0} onClick={() => dispatch({ type: 'hint' })}>Dica (−1 vida)</button>}
           {solved && !last && <button className="btn primary" onClick={() => dispatch({ type: 'next' })}>Próxima fase</button>}
         </div>
       </section>

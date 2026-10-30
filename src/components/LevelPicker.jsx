@@ -1,7 +1,7 @@
 import { LEVELS } from '../game/levels.js';
 
 export default function LevelPicker({ current, done, onPick }) {
-  const unlocked = (i) => i === 0 || done.includes(i - 1);
+  const unlocked = (i) => (i === 0 || done.includes(i - 1)) && !done.includes(i);
   return (
     <nav className="levels" aria-label="Escolher fase">
       {LEVELS.map((lv, i) => (

@@ -76,6 +76,11 @@ g.seg.hint .stick{fill:var(--mark)}
 .rules b{color:var(--lead);font-weight:400;text-decoration:underline;text-decoration-color:var(--red)}
 .streak{font-variant-numeric:tabular-nums;color:var(--lead-soft)}
 .streak b{color:var(--red);font-weight:400;font-size:24px}
+.lives{display:flex;align-items:flex-end;gap:6px;justify-content:center}
+.match-life{width:14px;height:40px;transition:filter .2s}
+.match-life.burned{filter:grayscale(1) opacity(0.5)}
+.match-life.just{animation:burn-out .4s ease}
+@keyframes burn-out{0%{transform:scale(1.2) rotate(-5deg)}50%{transform:scale(0.9) rotate(3deg)}100%{transform:scale(1) rotate(0)}}
 @media (max-width:480px){body{padding-left:52px}}
 @media (prefers-reduced-motion:reduce){.m,.win .head,.shake{transition:none;animation:none}}
 .levels button.boss{width:48px;border-width:2.4px;border-color:var(--red);color:var(--red);font-family:"Gochi Hand",cursive;font-size:21px}
