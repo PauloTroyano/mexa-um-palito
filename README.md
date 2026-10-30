@@ -1,5 +1,7 @@
 # Mexa Um Palito
 
+🎮 **[Jogar online](https://paulotroyano.github.io/mexa-um-palito/)**
+
 Jogo de palitos de fósforo: mova um único palito e deixe a conta certa. 15 fases, com chefões nas fases 5, 10 e 15.
 
 ## Rodar em desenvolvimento
