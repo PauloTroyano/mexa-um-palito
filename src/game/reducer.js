@@ -42,12 +42,12 @@ function check(state) {
   }
   const why = ok === null ? 'Assim um dos símbolos não forma número.' : 'A conta não fechou.';
   const shake = state.shake + 1;
-  if (!lv.boss) return { ...state, shake, msg: m(`${why} Toque em Tentar de novo.`) };
   const lives = state.lives - 1;
   if (lives <= 0) {
     const max = livesFor(state.level);
+    const label = lv.boss ? 'O chefão venceu desta vez.' : 'Suas vidas acabaram.';
     return { ...state, shake, lives: 0, lostNow: true,
-      msg: m(` Toque em Tentar de novo para recomeçar com ${max === 1 ? 'sua vida' : `${max} vidas`}.`, 'O chefão venceu desta vez.') };
+      msg: m(` Toque em Tentar de novo para recomeçar com ${max === 1 ? 'sua vida' : `${max} vidas`}.`, label) };
   }
   return { ...state, shake, lives, lostNow: true, msg: m(`${why} Você perdeu uma vida. Toque em Tentar de novo.`) };
 }

@@ -49,7 +49,7 @@ export default function App() {
       <section ref={tableRef} className={`table ${lv.boss ? 'boss' : ''}`}>
         <span className="tag">{lv.boss ? `FASE ${level + 1} · ${lv.boss.toUpperCase()}` : `FASE ${level + 1} DE ${LEVELS.length}`}</span>
         {lv.boss && <p className="boss-intro">{lv.intro}</p>}
-        {lv.boss && <Lives lives={lives} max={livesFor(level)} justLost={lostNow} />}
+        <Lives lives={lives} max={livesFor(level)} justLost={lostNow} />
 
         <Board glyphs={glyphs} cur={cur} lifted={lifted} solved={solved} hint={hint}
           onTap={(slot) => dispatch({ type: 'tap', slot })} />
