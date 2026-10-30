@@ -2,6 +2,7 @@ import { useEffect, useReducer, useRef } from 'react';
 import { LEVELS, livesFor } from './game/levels.js';
 import { evaluate, readAll } from './game/logic.js';
 import { reducer, initState } from './game/reducer.js';
+import { sounds } from './game/sounds.js';
 import Board from './components/Board.jsx';
 import Lives from './components/Lives.jsx';
 import LevelPicker from './components/LevelPicker.jsx';
@@ -20,6 +21,15 @@ export default function App() {
   useEffect(() => {
     try { localStorage.setItem(STORE, JSON.stringify({ level, done })); } catch { /* sem armazenamento: segue o jogo */ }
   }, [level, done]);
+
+  useEffect(() => { if (lifted) sounds.pickup(); }, [lifted]);
+  useEffect(() => { if (solved) sounds.correct(); }, [solved]);
+  useEffect(() => { if (lostNow) sounds.wrong(); }, [lostNow]);
+  const prevCurRef = useRef(cur);
+  useEffect(() => {
+    if (!lifted && cur && prevCurRef.current && cur !== prevCurRef.current) sounds.place();
+    prevCurRef.current = cur;
+  }, [cur, lifted]);
 
   // reinicia a animação de tremida a cada erro
   useEffect(() => {
