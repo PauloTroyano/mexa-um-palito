@@ -1,0 +1,27 @@
+{
+  "name": "mexa-um-palito",
+  "productName": "Mexa Um Palito",
+  "version": "1.0.0",
+  "description": "Mova um único palito de fósforo e deixe a conta certa.",
+  "main": "electron/main.cjs",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "electron": "electron .",
+    "package:win": "npm run build && electron-packager . \"Mexa Um Palito\" --platform=win32 --arch=x64 --out=release --overwrite --asar --ignore=\"^/(src|release|index\\.html|vite\\.config\\.js)\" --ignore=\"^/node_modules/(?!$)\"",
+    "test": "node --test src/game/logic.test.js"
+  },
+  "dependencies": {
+    "@fontsource/gochi-hand": "^5.3.0",
+    "@fontsource/patrick-hand": "^5.3.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@electron/packager": "^18.3.6",
+    "@vitejs/plugin-react": "^4.3.4",
+    "electron": "^33.4.11",
+    "vite": "^5.4.19"
+  }
+}

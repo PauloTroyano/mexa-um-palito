@@ -1,0 +1,95 @@
+:root{
+  color-scheme: light;
+  --paper:#FCFCF7; --line:#B9CFE8; --margin:#E8A0A0; --lead:#3A3A3F; --lead-soft:#6E6E76;
+  --wood:#F3DCA0; --red:#C8392E; --red-soft:#E8736A; --ok:#2E7D4F; --bad:#B3321F; --mark:#FFE36B;
+  --sketch:255px 12px 225px 14px/14px 225px 12px 255px;
+}
+html,body{height:100%}
+body{margin:0;background-color:var(--paper);color:var(--lead);font-family:"Patrick Hand","Comic Sans MS",cursive,sans-serif;font-size:19px;
+  background-image:
+    linear-gradient(90deg,transparent 43px,var(--margin) 43px,var(--margin) 45px,transparent 45px),
+    repeating-linear-gradient(180deg,transparent 0 31px,var(--line) 31px 32px);
+  background-attachment:local;padding-left:58px;padding-right:16px}
+body::before{content:"";position:fixed;left:12px;top:0;bottom:0;width:16px;pointer-events:none;
+  background:radial-gradient(circle at 8px 8px,#e7e3d6 0 7px,#cfc9b8 7px 8px,transparent 8.5px) 0 40px/16px 180px repeat-y}
+.wrap{max-width:720px;margin:0 auto;padding-block:20px 48px;display:flex;flex-direction:column;gap:18px}
+header{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:12px}
+.box{width:46px;height:32px;border:2px solid var(--lead);border-radius:var(--sketch);transform:rotate(-4deg);
+  background:repeating-linear-gradient(-35deg,var(--red-soft) 0 2px,transparent 2px 5px);position:relative}
+.box::after{content:"";position:absolute;left:4px;right:4px;top:50%;height:2px;background:var(--lead);opacity:.6}
+h1{font-family:"Gochi Hand","Patrick Hand",cursive;font-weight:400;font-size:clamp(34px,7vw,48px);margin:0;line-height:1;letter-spacing:.01em;text-wrap:balance;transform:rotate(-1.5deg)}
+h1 span{color:var(--red);position:relative}
+h1 span::after{content:"";position:absolute;left:-2px;right:-4px;bottom:2px;height:9px;background:var(--mark);opacity:.55;z-index:-1;transform:rotate(-2deg)}
+.sub{margin:6px 0 0;color:var(--lead-soft);font-size:18px}
+.modes{display:flex;gap:10px}
+.modes button{border:2px solid transparent;background:transparent;color:var(--lead-soft);font:inherit;font-size:19px;padding:2px 12px;cursor:pointer;border-radius:var(--sketch)}
+.modes button[aria-pressed="true"]{border-color:var(--lead);color:var(--lead)}
+.levels{display:flex;flex-wrap:wrap;gap:8px}
+.levels button{width:38px;height:38px;border:1.8px solid var(--lead-soft);border-radius:var(--sketch);background:transparent;color:var(--lead);font:inherit;font-size:19px;font-variant-numeric:tabular-nums;cursor:pointer;position:relative}
+.levels button:nth-child(odd){transform:rotate(-2deg)} .levels button:nth-child(even){transform:rotate(1.5deg)}
+.levels button.done{color:var(--ok);border-color:var(--ok)}
+.levels button.done::after{content:"✓";position:absolute;right:-6px;top:-10px;font-size:18px;color:var(--ok)}
+.levels button.cur{background:var(--mark);border-color:var(--lead)}
+.table{position:relative;padding:26px 10px 20px;display:flex;flex-direction:column;gap:14px;align-items:center;
+  border:2px solid var(--lead);border-radius:var(--sketch);background:transparent}
+.table::before,.table::after{content:"";position:absolute;top:-12px;width:78px;height:24px;background:#EDE6C8cc;box-shadow:0 1px 2px #0002}
+.table::before{left:18px;transform:rotate(-6deg)} .table::after{right:18px;transform:rotate(5deg)}
+.tag{font-family:"Gochi Hand",cursive;font-size:22px;color:var(--red);align-self:flex-start;transform:rotate(-2deg);margin-left:8px}
+.eqwrap{width:100%;overflow-x:auto;display:flex;padding-block:4px}
+svg#eq{flex:none;margin-inline:auto;width:100%;height:auto;max-width:660px;touch-action:manipulation;user-select:none;-webkit-tap-highlight-color:transparent}
+.slot{fill:none;stroke:var(--lead-soft);stroke-width:1.4;stroke-dasharray:3 5;opacity:.35;transition:opacity .15s}
+.hit{fill:transparent;cursor:pointer}
+g.seg:focus{outline:none}
+g.seg:focus-visible .slot{display:block;opacity:1;stroke:var(--red);stroke-dasharray:none}
+.holding g.seg.empty .slot{opacity:.9;stroke:var(--red)}
+.holding g.seg.empty:hover .slot{opacity:1;stroke-width:2.4;stroke-dasharray:none}
+g.seg.empty .m{display:none}
+g.seg.full .slot{display:none}
+.m{transition:transform .18s ease}
+.stick{fill:var(--wood);stroke:var(--lead);stroke-width:1.7}
+.grain{stroke:var(--lead-soft);stroke-width:.8;opacity:.7;fill:none}
+.head{fill:var(--red);stroke:var(--lead);stroke-width:1.6}
+.hatch{stroke:#8f2019;stroke-width:1;opacity:.7}
+g.seg.lifted .m{transform:translate(0,-10px) rotate(-3deg)}
+g.seg.lifted .slot{display:block;opacity:.9;stroke:var(--red)}
+g.seg.lifted .stick{fill:var(--mark)}
+g.seg.fixed .hit{cursor:default}
+g.seg.hint .slot{display:block;opacity:1;stroke:var(--red);stroke-dasharray:none;stroke-width:3}
+g.seg.hint .stick{fill:var(--mark)}
+.win .head{animation:burn .5s ease-in-out infinite alternate}
+@keyframes burn{from{fill:var(--red)}to{fill:#F08A2A}}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+.shake{animation:shake .25s ease 2}
+.read{font-family:"Gochi Hand",cursive;font-size:clamp(26px,6vw,32px);font-variant-numeric:tabular-nums;display:flex;align-items:center;gap:14px;min-height:40px;flex-wrap:wrap;justify-content:center}
+.pill{font-family:"Patrick Hand",cursive;font-size:18px;padding:0 12px;border:2px solid currentColor;border-radius:50% 45% 55% 48%/60% 50% 55% 45%;transform:rotate(-3deg)}
+.pill.ok{color:var(--ok)} .pill.bad{color:var(--bad)} .pill.idle{color:var(--lead-soft)}
+.msg{margin:0;color:var(--lead-soft);text-align:center;min-height:1.4em;text-wrap:balance;line-height:1.3}
+.msg strong{color:var(--lead);font-weight:400;text-decoration:underline wavy var(--red) 1.5px;text-underline-offset:4px}
+.actions{display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
+.btn{font:inherit;font-size:20px;padding:6px 18px;cursor:pointer;border:2px solid var(--lead);border-radius:var(--sketch);background:transparent;color:var(--lead)}
+.btn:hover{background:#0000000a}
+.btn:disabled{opacity:.35;cursor:default;background:transparent}
+.btn.primary{background:repeating-linear-gradient(-30deg,#f6c9c4 0 3px,#fbe3e0 3px 6px);border-color:var(--red);color:var(--bad)}
+.btn:focus-visible,.levels button:focus-visible,.modes button:focus-visible{outline:2px dashed var(--red);outline-offset:3px}
+.rules{color:var(--lead-soft);font-size:18px;line-height:32px;max-width:62ch;margin:0}
+.rules b{color:var(--lead);font-weight:400;text-decoration:underline;text-decoration-color:var(--red)}
+.streak{font-variant-numeric:tabular-nums;color:var(--lead-soft)}
+.streak b{color:var(--red);font-weight:400;font-size:24px}
+@media (max-width:480px){body{padding-left:52px}}
+@media (prefers-reduced-motion:reduce){.m,.win .head,.shake{transition:none;animation:none}}
+.levels button.boss{width:48px;border-width:2.4px;border-color:var(--red);color:var(--red);font-family:"Gochi Hand",cursive;font-size:21px}
+.levels button.boss.cur{background:var(--mark);color:var(--bad)}
+.levels button.boss::before{content:"";position:absolute;left:50%;top:-11px;width:22px;height:10px;transform:translateX(-50%);
+  background:linear-gradient(135deg,transparent 45%,var(--red) 45% 60%,transparent 60%) 0 0/8px 10px,linear-gradient(225deg,transparent 45%,var(--red) 45% 60%,transparent 60%) 0 0/8px 10px;
+  border-bottom:2px solid var(--red)}
+.table.boss{border-width:3px;border-color:var(--red)}
+.table.boss .tag{font-size:26px}
+.boss-intro{margin:-6px 0 0;color:var(--bad);text-align:center;font-size:18px;text-wrap:balance}
+.lives{display:flex;gap:8px;align-items:center;color:var(--lead-soft);font-size:18px}
+.heart{width:26px;height:24px}
+.heart path{fill:var(--red);stroke:var(--lead);stroke-width:1.6;stroke-linejoin:round}
+.heart.lost path{fill:none;stroke:var(--lead-soft);stroke-dasharray:3 3}
+.heart.lost{transform:rotate(-12deg)}
+@keyframes pop{0%{transform:scale(1)}40%{transform:scale(1.35) rotate(8deg)}100%{transform:scale(1) rotate(-12deg)}}
+.heart.just{animation:pop .4s ease}

@@ -1,0 +1,8 @@
+{
+  "appId": "com.mexaumpalito.app",
+  "productName": "Mexa Um Palito",
+  "directories": { "output": "release-builder" },
+  "files": ["dist/**/*", "electron/**/*", "package.json"],
+  "win": { "target": [{ "target": "portable", "arch": ["x64"] }], "signAndEditExecutable": false },
+  "portable": { "artifactName": "MexaUmPalito.exe" }
+}
