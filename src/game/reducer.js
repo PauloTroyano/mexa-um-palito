@@ -93,7 +93,7 @@ function hint(state) {
 
 export function reducer(state, action) {
   switch (action.type) {
-    case 'load': return loadLevel(state, action.level, false);
+    case 'load': return loadLevel(state, action.level, action.level === state.level);
     case 'restart': return loadLevel({ ...state, done: [] }, 0, false);
     case '_load_save': return initState(action.saved);
     case 'retry': return loadLevel(state, state.level, true);
