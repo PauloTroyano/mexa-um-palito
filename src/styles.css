@@ -12,7 +12,8 @@ body{margin:0;background-color:var(--paper);color:var(--lead);font-family:"Patri
   background-attachment:local;padding-left:58px;padding-right:16px}
 body::before{content:"";position:fixed;left:12px;top:0;bottom:0;width:16px;pointer-events:none;
   background:radial-gradient(circle at 8px 8px,#e7e3d6 0 7px,#cfc9b8 7px 8px,transparent 8.5px) 0 40px/16px 180px repeat-y}
-.wrap{max-width:720px;margin:0 auto;padding-block:20px 48px;display:flex;flex-direction:column;gap:18px}
+@keyframes page-enter{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.wrap{max-width:720px;margin:0 auto;padding-block:20px 48px;display:flex;flex-direction:column;gap:18px;animation:page-enter .4s cubic-bezier(.22,.61,.36,1)}
 header{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
 .brand{display:flex;align-items:center;gap:12px}
 .box{width:46px;height:32px;border:2px solid var(--lead);border-radius:var(--sketch);transform:rotate(-4deg);
@@ -32,7 +33,7 @@ h1 span::after{content:"";position:absolute;left:-2px;right:-4px;bottom:2px;heig
 .levels button.done::after{content:"✓";position:absolute;right:-6px;top:-10px;font-size:18px;color:var(--ok)}
 .levels button.cur{background:var(--mark);border-color:var(--lead)}
 .table{position:relative;padding:26px 10px 20px;display:flex;flex-direction:column;gap:14px;align-items:center;
-  border:2px solid var(--lead);border-radius:var(--sketch);background:transparent}
+  border:2px solid var(--lead);border-radius:var(--sketch);background:transparent;animation:page-enter .35s cubic-bezier(.22,.61,.36,1)}
 .table::before,.table::after{content:"";position:absolute;top:-12px;width:78px;height:24px;background:#EDE6C8cc;box-shadow:0 1px 2px #0002}
 .table::before{left:18px;transform:rotate(-6deg)} .table::after{right:18px;transform:rotate(5deg)}
 .tag{font-family:"Gochi Hand",cursive;font-size:22px;color:var(--red);align-self:flex-start;transform:rotate(-2deg);margin-left:8px}
@@ -92,7 +93,7 @@ g.seg.hint.empty .slot{animation:hint-slot .7s ease-in-out infinite}
 .start-actions{display:flex;flex-direction:column;align-items:center;gap:14px;width:100%;max-width:260px}
 .start-btn{width:100%;font-size:22px;padding:10px 24px;text-align:center}
 @media (max-width:480px){body{padding-left:52px}}
-@media (prefers-reduced-motion:reduce){.m,.win .head,.shake,g.seg.hint .stick,g.seg.hint.empty .slot{transition:none;animation:none}}
+@media (prefers-reduced-motion:reduce){.m,.win .head,.shake,.wrap,.table,g.seg.hint .stick,g.seg.hint.empty .slot{transition:none;animation:none}}
 .levels button.boss{width:48px;border-width:2.4px;border-color:var(--red);color:var(--red);font-family:"Gochi Hand",cursive;font-size:21px}
 .levels button.boss.cur{background:var(--mark);color:var(--bad)}
 .levels button.boss::before{content:"";position:absolute;left:50%;top:-11px;width:22px;height:10px;transform:translateX(-50%);

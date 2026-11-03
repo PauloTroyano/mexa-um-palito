@@ -119,7 +119,7 @@ export default function App() {
 
       <LevelPicker current={level} done={done} onPick={(i) => dispatch({ type: 'load', level: i })} />
 
-      <section ref={tableRef} className={`table ${lv.boss ? 'boss' : ''}`}>
+      <section key={level} ref={tableRef} className={`table ${lv.boss ? 'boss' : ''}`}>
         <span className="tag">{lv.boss ? `FASE ${level + 1} · ${lv.boss.toUpperCase()}` : `FASE ${level + 1} DE ${LEVELS.length}`}</span>
         {lv.boss && <p className="boss-intro">{lv.intro}</p>}
         <Lives lives={lives} max={livesFor(level)} justLost={lostNow} />
