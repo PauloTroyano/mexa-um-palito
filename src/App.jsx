@@ -66,7 +66,7 @@ export default function App() {
 
   useEffect(() => {
     if (screen !== 'game') return;
-    try { localStorage.setItem(STORE, JSON.stringify({ level, done })); } catch { /* nada */ }
+    try { localStorage.setItem(STORE, JSON.stringify({ level, done, lives })); } catch { /* nada */ }
   }, [screen, level, done]);
 
   useEffect(() => { if (lifted) sounds.pickup(); }, [lifted]);

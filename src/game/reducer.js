@@ -7,7 +7,8 @@ const m = (text, em = '') => ({ em, text });
 
 export function initState(saved = {}) {
   const level = Number.isInteger(saved.level) && LEVELS[saved.level] ? saved.level : 0;
-  return loadLevel({ done: saved.done ?? [], shake: 0 }, level, false);
+  const hasSavedLives = Number.isInteger(saved.lives) && saved.lives > 0;
+  return loadLevel({ done: saved.done ?? [], shake: 0, lives: saved.lives ?? 0 }, level, hasSavedLives);
 }
 
 function loadLevel(state, level, keepLives) {
