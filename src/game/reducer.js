@@ -84,6 +84,7 @@ function hint(state) {
   return {
     ...base,
     lives,
+    shake: base.shake + 1,
     hint: { ...sol, stage },
     msg: stage === 1
       ? m('O palito destacado é o que precisa sair. Toque em Dica de novo para ver o destino.')
